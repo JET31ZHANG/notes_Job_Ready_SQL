@@ -283,3 +283,124 @@ CREATE TABLE phone (
     - 如何为这些列分配数据类型；
     - 如何设定他们可以为空或不可为空；
     - 通过定义与使用主键和外键来管理数据库中表之间的关系。
+
+## 本课练习
+
+### 练习 7-1：Book 数据库
+SQL 脚本是用于备份和恢复数据库的一种方法。本练习分为三个部分，以指导你构建和测试一个脚本。该脚本可用于（并可重用！）创建 book 数据库结构，包括如图 7-4 所示的ERD中定义的所有表和关系。
+
+![Books 数据库的 ERD](../images/ch07/the_ERD_of_Database_of_Books.jpg)
+
+以列表格式显示，数据库结构应如下所示：
+
+- **Author**
+    - **AuthorID INT(PK)**
+    - **FirstName STRING(25)**
+    - MiddleName STRING(25)
+    - **LastName STRING(50)**
+    - Gender STRING(1)
+    - **DateOfBirth DATE TIME**
+    - DateOfDeath DATE TIME
+- **AuthorBook**
+    - **AuthorID INT(PK, FK)**
+    - **BookID INT(PK, FK)**
+- **Book**
+    - **BookID INT(PK)**
+    - **Title STRING(100)**
+    - PublicationDate DATETIME
+- **BookFormat**
+    - **BookID INT(PK, FK)**
+    - **FormatID INT(PK, FK)**
+    - Price DOUBLE
+    - QuantityOnHand INT
+- **Format**
+    - **FormatID INT(PK)**
+    - **FormatName STRING(12)**
+- **BookGenre**
+    - **BookID INT(PK, FK)**
+    - **GenreID INT(PK, FK)**
+- **Genre**
+    - **GenreID INT(PK)**
+    - **GenreName STRING(25)**
+
+加粗的不能为空
+
+第1步：定义表
+
+给定 books 数据库的标准化 ERD，使用 SQL 来定义 ERD 中描述的每个表。在创建表之前，确保使用适当的数据库。如果尚未为此作业创建数据库， 在开始之前创建一个。
+首先，创建主表（不包括外键列的表），以避免在创建外键时出现参照完整性的问题。每个表都必须包括以下内容：
+- 适当的表名
+- 一个主键
+- 在 ERD 中标识的所有列，使用标识的名称、适用于目标 RDBMS 的数据类型和适当的空值选项。
+所有外键都必须在初始的 CREATE TABLE 语句中定义为外键。使用 SHOW TABLES 和 DESCRIBE 确保每个表的结构均正确。
+不要使用 ALTER TABLE 语句对表的初始版本进行更改。相反，删除该表，更新 SQL 语句以包括适当的更改，并再次运行该语句。在工作时，将每个 CREATE TABLE 语句保存到文本或代码编辑器的文件中，以便在本练习的第 2 部分中可以访问它们。
+
+第2步：book 数据库 SQL 脚本
+当你确认用于创建表的 SQL 语句可以正常运行时，创建一个脚本，以便在必要时可以重用该脚本来重建数据库结构。
+(1) 可以通过创建一个新的文本文件（使用任何文本或代码编辑器）创建一个 SQL 脚本文件，并将文件的扩展名设置为 .sql。
+(2) 脚本的第一行应该删除已存在的数据库。记住，这将删除数据库中的所有内容，因此，在删除之前确保有重新创建数据库的方法。
+`DROP DATABASE IF EXISTS database_name;`
+(3) 脚本的第二行应该创建一个与已删除数据库名称相同的数据库。
+`CREATE DATABASE database_name;`
+(4) 脚本的第三行应该使用新创建的数据库。
+`USE database_name;`
+在 USE 语句后添加创建表的一系列语句。确保每个 CREATE TABLE 语句以分号结尾。在更改完之后，保存该文件。
+
+第3步：测试脚本
+最后，验证可以在 RDBMS 中运行该脚本。大多数 RDBMS 都包括一个选项来打开并运行 .sql 文件，但如果无法轻松找到它，则可以打开刚刚创建的脚本，选择并复制文件中的所有内容，然后将脚本粘贴到 SQL 提示符下。在运行脚本后，使用 SHOW TABLES 和 DESCRIBE 来验证所有表是否存在，以及它们的结构是否与图 7-4 中包括的 ERD 结构相匹配。
+
+### 练习 7-2：DDL 操作——Movie 数据库
+在本练习中，你将通过编写脚本文件来练习 DDL 技能，以创建新的数据库、表和关系。该数据库应使用此处描述的结构来跟踪电影。
+编写 SQL 语句以创建下面的所有表。将这些语句放在一个脚本中，并在完成后对该脚本文件进行保存。这些表已经进行了规范化。你的工作是确定要分配给每个列的数据类型，以及创建适当的键和必需的列。可以使用以下列表，或者通过 ERD 进行可视化，本练习的任务分为三个部分。
+
+- **Movie**
+    - **MovieID**：主键，用于标记记录。
+    - GenreID：外键，Genre 表，不能为空。
+    - DrirectorID：外键，Director 表，可以为空。
+    - RatingID：外键，Rating 表，可以为空。
+    - **Title**：不能为空，扩展字符集，长度为 128。
+    - ReleaseDate：可以为空。
+- **Genre**
+    - **GenreID**：主键，用于标记记录。
+    - **GenreName**：不能为空，扩展字符集，长度为 30。
+- **Director**
+    - **DirectorID**：主键，用于标记记录。
+    - **FirstName**：不能为空，扩展字符集，长度为 30。
+    - **LastName**：不能为空，扩展字符集，长度为 30。
+    - BirthDate：可以为空。
+- **Rating**
+    - **RatingID**：主键，用于标记记录。
+    - **RatingName**：不能为空，扩展字符集，长度为 5。
+- **Actor**
+    - **ActorID**：主键，用于标记记录。
+    - **FirstName**：不能为空，扩展字符集，长度为 30。
+    - **LastName**：不能为空，扩展字符集，长度为 30。
+    - BirthDate：可以为空。
+- **CastMembers**
+    - **CastMemberID**：主键，用于标记记录。
+    - **ActorID**：外键，Actor 表，不能为空。
+    - **MovieID**：外键，Movie 表，不能为空。
+    - **Role**：不能为空，扩展字符集，长度为 50。
+
+第 1 步：定义表
+给定数据库的规范化模式，使用 SQL 定义前面描述的每个表。确保在创建表之前使用适当的数据库。如果还没有为此作业创建数据库，在开始之前创建一个。
+首先，创建主表（不包括外键列的表），以避免在创建外键时出现引用完整性的问题，每个表都必须包括以下内容：
+- 适当的表名
+- 一个主键
+- 在 ERD 中标识的所有列，使用标识的名称、适用于目标 RDBMS 的数据类型和适当的空值选项。
+所有外键都必须在初始的 CREATE TABLE 语句中定义为外键。使用 SHOW TABLES 和 DESCRIBE 确保每个表的结构均正确。
+不要使用 ALTER TABLE 语句的初始版本进行更改。相反，删除该表，更新 SQL 语句以包括适当的更改，并再次运行该语句。在工作时，将每个 CREATE TABLE 语句保存到文本或代码编辑器的文件中，以便在本练习的第 2 部分中可以访问它们。
+
+第 2 步：创建脚本
+当你确认用于创建表的 SQL 语句可以正常运行时，创建一个脚本，以便在必要时可以重用该脚本来重建数据库结构。
+(1) 可以通过创建一个新的文本文件（使用任何文本或代码编辑器）创建一个 SQL 脚本文件，并将文件的扩展名设置为 .sql。
+(2) 脚本的第一行应该删除已存在的数据库。记住，这将删除数据库中的所有内容，因此，在删除之前确保有重新创建数据库的方法。
+`DROP DATABASE IF EXISTS database_name;`
+(3) 脚本的第二行应该创建一个与已删除数据库名称相同的数据库
+`CREATE DATABASE database_name`
+(4) 脚本的第三行应该使用新创建的数据库
+`USE database_name;`
+在 USE 语句后添加创建表的一系列语句。确保每个 CREATE TABLE 语句以分号结尾。
+
+第 3 步：测试脚本
+与练习 1 一样，完成本练习前，验证可以在 RDBMS 中运行脚本。大多数 RDBMS 都包括一个选项来打开并运行 .sql 文件，但如果无法轻松找到它，则可以打开刚刚创建的脚本，选择并复制文件中的所有内容，然后将脚本粘贴到 SQL 提示符下。在运行脚本后，使用 SHOW TABLES 和 DESCRIBE 来验证所有表是否存在，以及它们的结构是否与本练习开始时包括的 ERD 结构相匹配。
