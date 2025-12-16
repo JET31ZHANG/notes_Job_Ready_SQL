@@ -268,3 +268,65 @@ OrderProduct 表
     - 设计师在设计过程中对系统的思考方式不同。
 - 设计从第一范式（1NF）转移到第三范式（3NF）对系统的数据完整性有很大影响。代价是增加了复杂性和潜在性能问题。
 - 从长远看，最重要的是从一开始就应有一个设计良好的数据库。
+
+## 本课练习
+
+### 练习 2-1：员工信息表
+表 2-25 包含了一个 Employee 数据库的字段列表和两个 Employee 的示例数据，使用规范化将这些字段放入数据库。
+
+表 2-25 Employee 数据库
+|Fields|Sample Employee 1|Sample Employee 2|
+|:-:|:-:|:-:|
+|Name|John Doe|Julie Parks|
+|Hire Date|September 1, 2023|August 12, 2020|
+|Start Date|September 14, 2023|September 1, 2020|
+|End Date|n/a|December 31, 2022|
+|Employee ID|111333|012348|
+|Hours|40|40|
+|Hourly Wage|23.95|17.95|
+|Phone Number|415-555-1234(mobile)<br />415-555-2345(desk)|415-555-4567(mobile)<br />415-555-5678(desk)<br />415-555-6789(home)|
+|Department|Accounting|Maintenance|
+|Supervisor|Sarah Johnson|Fred Moore|
+|Office Number|A301|G302|
+|Location|San Francisco, CA|Seattle, WA|
+|Subordinates|Best Williams, Charlie Conrad,<br />Doug Demiter, Elinore Engoles,<br />Fred Filmore|n/a|
+
+### 练习 2-2：图书馆和书籍
+在第 1 课的练习 1-1 中，你为图书馆系统创建了表和字段。检查创建的表，确保它们是完整的。考虑以下情况：
+- 可以有多个图书馆。
+- 每个图书馆可以容纳任何一本书的一个或多个副本。
+- 任何一本书都刻意存放在一个或多个图书馆，但也可能不存放。
+- 书籍可以有作者，作者也应该被追踪，但只有对图书馆数据库中的书的作者进行追踪才有意义。
+- 作者可以关联到一本书或多本书。
+- 一本书可以有一个或多个作者。
+- 跟踪的图书信息应该包括作者、书名和 13 位的ISBN。
+- 一个 ISBN 只能与一本书相关联，一本书只能有一个 ISBN。
+再确认你正在追踪所有需要的字段后，请对表中的字段进行规范化。是否有必要进行去规范化？
+
+### 练习 2-3：酒店
+设计一个酒店数据库，该数据库必须包含以下内容：
+- 客房信息，包括有多少张床和床的尺寸，以及可用的便利设施，如微波炉、冰箱或咖啡壶。
+- 客人信息，包括姓名、地址、电话号码和电子邮件地址。
+- 预定信息，包括入住日期、退房日期、预订人及客人数量。
+在确定用于表的数据库列后，请应用范式创建最终的数据库设计。
+
+### 练习 2-4：学生和课程
+表 2-26 包含了一个列出学生及其所修课程和费用的数据库信息。请对该表进行规范化处理。
+
+表 2-26 课程和学生表
+|FirstName|LastName|Major|Semester|Class|Fees|Professor|
+|:-|:-|:-|:-:|:-:|:-:|:-:|
+|Susie|Summers Pre-med,<br />Nursing|Pre-med,<br />Nursing|Fall, 2022|Biology 101|$150|Johnson|
+|Susie|Summers Pre-med,<br />Nursing|Pre-med,<br />Nursing|Fall, 2022|Calculus 103|$120|Samuels|
+|Peter|Parker|Physics,<br />Anthropology|Fall, 2022|Biology 101|$150|Johnson|
+|Peter|Parker|Physics,<br />Anthropology|Fall, 2022|Physics 101|$220|Fredrick|
+|Susie|Summers Pre-med,<br />Nursing|Pre-med,<br />Nursing|Spring, 2023|Biology 201|$120|Johnson|
+
+### 练习 2-5：菜单数据库
+设计一个餐厅菜单的数据库，它必须支持以下功能：
+- 生成一份包括菜单上所有条目的列表，包括菜名、菜肴描述和价格。
+- 按类别对菜单上的条项进行分组，包括开胃菜、主菜、沙拉、甜点和饮料。
+- 创建一个客户订单，包括订购的每个条目的数量和价格，以及输入订单的日期和时间。
+- 可以识别下单的员工。
+作为列出的基本内容的延申，包括配送订单所需的客户数据，如送货地址和联系信息。
+一旦确定并创建了基础数据库信息，请按照本课的步骤应用范式。
