@@ -198,3 +198,57 @@ CREATE TABLE Product (
 - 创建数据库的表时，要审查将包括的列。因为表中的列默认可以包括空值，故设计审查应包括确定列是否应该标记为 NOT NULL，来确保需要一个值。主键列 NOT NULL 是必须的。如果列可能包括大量空元素，则可能需要重新设计数据库，减少所需的存储空间。
 - 为常用列分配索引，可提高查找效率。
 - 数据库被打开时，索引列（主键和外键）中的数据被自动加载到内存中。
+
+## 本课练习
+
+### 练习 6-1：对 SQL 代码进行格式化
+重新格式化下面这行 SQL 代码，使其呈现出更清晰、更易于阅读的形式。
+
+```sql
+SELECT Last, First, Email, MobileNumber FROM Contacts WHERE Age >= 21 ORDERED
+BY last, First;
+```
+
+```sql
+SELECT Last, First, Email, MobileNumber 
+FROM Contacts 
+WHERE Age >= 21 
+ORDER BY last, First;
+```
+
+### 练习 6-2：联系人问题
+请看下面列表：
+
+```sql
+CREATE TABLE Contact (
+    ID INT NOT NULL PRIMARY KEY,
+    Last VARCHAR(50) NOT NULL,
+    First VARCHAR(40),
+    Age INT,
+    Email VARCHAR(100),
+    MobileNumber VARCHAR(12),
+    HomeNumber VARCHAR(12),
+    WorkNumber VARCHAR(12)
+);
+```
+
+回答下列问题：
+- 列表中哪些列是必须提供数据的？
+- 每个列的数据类型是什么？
+- 一个列能存储的最长姓氏是多少个字符？
+- Age 列是必须给出值的吗？
+- 要使 WorkNumber 成为必须提供值的列，需要更改什么？
+
+### 练习 6-3：丢失联系人
+在本科介绍了 null。如表 6-7 所示的联系人数据库允许使用空值。然而，这个数据库浪费了很多空间。重新设计此数据库，使其以一种更有效地利用存储空间的方式使用多个表。
+
+表 6-7 联系人（Contacts） 表
+|ID|Last|First|Email|MobileNumber|HomeNumber|WorkNumber|Fax|
+|:-|:-|:-|:-|:-|:-|:-|:-:|
+|c001|Jones|John|john@bogus.com|317-555-1212|317-555-1213|317-555-1214|null|
+|c002|Buford|Bob|null|null|null|415-555-3333|null|
+|c003|Smith|Sam|Sam@bogus.com|null|415-555-1212|null|null|
+|c004|Michaels|Mitch|null|415-555-2121|null|null|null|
+|c005|Andrews|Adam|Adam@bogus.com|698-5555-1212|null|null|null|
+|c006|Finkelstein|Fred|null|null|217-555-4340|null|null|
+|c007|Black|Brent|brent@bogus.com|null|null|null|null|
