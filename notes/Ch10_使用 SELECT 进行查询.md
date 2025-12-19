@@ -280,3 +280,30 @@ WHERE Newtable.DateDifference > 365;
 - 可列出要包括的列，或使用(*)选择所有的列，列名之后跟着FROM子句，该子句包括要从哪些表中读取数据；
 - WHERE 子句紧随在 FROM 子句后，是个布尔表达式。可使用 AND、OR 和其他运算符来组合多个运算符；
 - 可使用表中现有数据进行计算，创建新的数据。AS 关键字可用于命名包括计算数据的列。
+
+## 本课练习
+
+### 练习 10-1：投诉
+在本课中，有许多建议的问题，可以使用 SELECT 语句和 Consumer Complaints 数据库来回答。如果在阅读本课时没有这样做，则现在应编写适当的 SELECT 语句。
+- ComplaintId 为 1,200,385 的记录是否存在？
+- ComplaintId 小于 100,000 的投诉有多少？
+- ComplaintId 在 100,000 和 200,000 之间，投诉最多的产品是什么？
+- 2014 年元旦有没有人投诉？
+- 2018 年有人投诉吗？
+- 2015 年 7 月多少投诉？
+- 有没有投诉的接收日期（DateReceived）早于发送日期（DateSentToCompany）?
+- 查找以 V 开头的公司名称的消费者投诉。
+- 查找在投诉中使用“whom”一词的投诉内容。
+- 查找 SubmissionMethods 的长度恰好为三个字符的记录。
+- 查找投诉中提到贷款（loan）的问题。
+
+### 练习 10-2：私人教练
+在这些练习中，你将使用 PersonalTrainer schema 完成一系列 SELECT 查询。这将建立 Personal Trainer 数据库。
+你需要运行 personaltrainer-schema-and-data.sql 脚本来创建此数据库。可以在本书的配套文件中找到该脚本，可以在 www.wiley.com/go/JobReadySQL 上获取，或在 the-software-guild.s3.amazonaws.com/sql/v1-2003/data-files/personaltrainer-schema-and-data.sql 上找到它。
+在将文件保存到计算机后，可以使用以下任何方法来运行此脚本：
+- 打开MySQL Workbench，并连接到本地的 MySQL 服务器。双击保存的 .sql 文件，它应该会自动在 MySQL Workbench 中打开。使用工具栏中的 Execute 按钮来运行该脚本并创建数据库
+
+- 在 MySQL Workbench 中，使用文件菜单或工具栏中的 Open SQL Script 命令。导航到保存在计算机上的文件，打开该文件，并单击 Execute 按钮运行该脚本。
+
+- 打开 .sql 文件，并将其内容复制到系统剪贴板中。在 MySQL Workbench 中打开一个新的查询窗口，或者通过命令行界面（如 Windows 命令提示符或终端）连接到 MySQL 服务器。将脚本粘贴到提示符处，并运行它。
+
